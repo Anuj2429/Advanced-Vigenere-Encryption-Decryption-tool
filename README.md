@@ -1,39 +1,18 @@
-# Advanced-Vigenere-Encryption-Decryption-tool
-A modern and secure reimagining of the classic Vigenère cipher, implemented in Python with a sleek dark-themed Tkinter interface.This project goes beyond the historical cipher by adding key strengthening, per-message salting, and binary-safe encryption—making it suitable for encrypting everything from source code to images.
+# Advanced Vigenère Cipher (Tkinter)
 
-🚀 Features
-🔑 Stronger Key Handling
-   Accepts short user keys (1–2 characters) but warns about low security.
-   Uses PBKDF2 (SHA-256) with 200,000 iterations for secure key derivation.
-   Random strong key generator included.
-   No keys stored — copy key option provided.
+A Tkinter desktop app that keeps the "per-byte Vigenère-style" feel while adding modern safeguards:
 
-🛡️ Per-Message Random Salt
-    Every encryption generates a new 16-byte salt.
-    Salt is packaged with ciphertext for secure decryption.
-    Prevents precomputed/rainbow table attacks.
+- PBKDF2 key derivation (SHA-256, 200k iterations)
+- Random per-encryption salt (16 bytes)
+- Deterministic keystream expansion for messages longer than the key
+- Multi-pass transform: Add -> XOR -> Sub (and reversed on decrypt)
+- Text Mode (scrollable input/output) and File Mode (binary-safe read/write)
+- Short-key popup warning (< 8 chars), password-style key box with Show/Copy, and Generate Key (for encryption)
 
-🔄 Multi-Pass Binary-Safe Encryption
-   Works on raw bytes (supports any file format).
-   Three transformations per byte:
-   Add key byte (mod 256)
-   XOR with next key byte
-   Subtract key byte (mod 256)
-   Keystream repeats for longer data.
+## Run
 
-📂 Flexible Input/Output
-   Text Mode: Scrollable text area for encryption/decryption.
-   File Mode: Encrypt/decrypt any file and choose save location.
-   Works seamlessly with programs, documents, and images.
+```bash
+python app.py
+```
 
-🔒 Security Advantages
-    Protects against frequency analysis (improved over original Vigenère).
-    Salt + PBKDF2 make brute-force impractical.
-    Binary-safe, preserving all file formats without corruption.
-
-📦 Requirements
-   Python 3.6+
-   Tkinter (comes pre-installed with Python)
-
-⚡ How to Run
-    python app.py
+No external dependencies required (Tkinter is included with most Python installs).
